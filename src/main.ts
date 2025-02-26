@@ -34,8 +34,8 @@ function renderTasks(){
                   <label for="_checkbox-26" class="text-xl lg:text-2xl font-semibold text-gray-300 text-wrap">${item.task}</label>
                 </div>
                 <div class="flex justify-center items-center gap-x-4">
-                  <button class="cursor-pointer flex justify-center items-center invert-75"><img class="h-7 " src="./src/assests/write.svg" alt=""></button>
-                  <button class="cursor-pointer flex justify-center items-center invert-75"><img class="h-7 " src="./src/assests/trash.svg" alt=""></button>
+                  <button class="cursor-pointer flex justify-center items-center invert-75"><img class="h-7 " src="./assests/write.svg" alt=""></button>
+                  <button class="cursor-pointer flex justify-center items-center invert-75"><img class="h-7 " src="./assests/trash.svg" alt=""></button>
                 </div>
               </div>`
         )).join("")
