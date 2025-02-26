@@ -9,7 +9,7 @@ type Todo = {
 let taskList:Todo[] = [];
 let id = 1;
 
-const goalElement = document.getElementById("goal") as HTMLDivElement;
+// const goalElement = document.getElementById("goal") as HTMLDivElement;
 const inputElement = document.getElementById("task") as HTMLInputElement
 const addToDoBtn = document.getElementById("add") as HTMLButtonElement
 const taskListElement = document.getElementById("taskList") as HTMLDivElement
@@ -53,3 +53,5 @@ addToDoBtn.addEventListener("click", (event)=>{
     renderTasks();
     inputElement.value = ""
 })
+
+//
