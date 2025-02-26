@@ -1,4 +1,6 @@
 import './style.css'
+import trash from "./assests/trash.svg"
+import write from "./assests/write.svg"
 
 type Todo = {
     id:number
@@ -19,6 +21,7 @@ taskList.push({id:id,task:"BreakFast", isCompleted:true})
 
 //showing the tasks
 renderTasks();
+import list from "./assests/trash.svg"
 
 function renderTasks(){
     if(taskList.length>0){
@@ -34,8 +37,8 @@ function renderTasks(){
                   <label for="_checkbox-26" class="text-xl lg:text-2xl font-semibold text-gray-300 text-wrap">${item.task}</label>
                 </div>
                 <div class="flex justify-center items-center gap-x-4">
-                  <button class="cursor-pointer flex justify-center items-center invert-75"><img class="h-7 " src="./assests/write.svg" alt=""></button>
-                  <button class="cursor-pointer flex justify-center items-center invert-75"><img class="h-7 " src="./assests/trash.svg" alt=""></button>
+                  <button class="cursor-pointer flex justify-center items-center invert-75"><img class="h-7 " src=${write} alt=""></button>
+                  <button class="cursor-pointer flex justify-center items-center invert-75"><img class="h-7 " src=${trash} alt=""></button>
                 </div>
               </div>`
         )).join("")
@@ -54,4 +57,4 @@ addToDoBtn.addEventListener("click", (event)=>{
     inputElement.value = ""
 })
 
-//
+//updating a to do 
