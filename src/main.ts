@@ -13,7 +13,7 @@ let taskList: Todo[] = JSON.parse(localStorage.getItem("taskList") || "[]");
 let id = taskList.length ? Math.max(...taskList.map(t => t.id)) + 1 : 1;
 let isEditingMode: boolean = false;
 let editingId: number | null = null;
-const totalTargets:number = taskList.length;
+let totalTargets:number = 0;
 let completedTasks:number = 0
 
 const inputElement = document.getElementById("task") as HTMLInputElement;
@@ -31,8 +31,8 @@ function renderTasks() {
     taskListElement.innerHTML = taskList
       .map(
         (item) =>
-          `<div id="${item.id}" class="task bg-background lg:w-[40vw] flex justify-between items-center gap-x-16 lg:gap-x-40 px-4 py-2 rounded-lg border border-border">
-            <div class="flex justify-center items-center gap-x-4">
+          `<div id="${item.id}" class="task bg-background grid grid-cols-8 gap-x-2 w-fit px-4 py-2 rounded-lg border border-border">
+            <div class="flex justify-start items-center gap-x-4 col-span-6">
               <div class="checkbox-wrapper-26">
                 <input type="checkbox" id="checkbox-${item.id}" ${item.isCompleted ? "checked" : ""}>
                 <label for="checkbox-${item.id}">
@@ -41,22 +41,22 @@ function renderTasks() {
               </div>
               ${
                 isEditingMode && editingId === item.id
-                  ? `<input class="p-1 rounded-lg ring-1 ring-gray-400 outline-none text-white max-w-[25vw]" type="text" id="edit-${item.id}" value="${item.task}">`
-                  : `<label class="text-xl lg:text-2xl font-semibold text-gray-300 text-wrap ${item.isCompleted? "line-through" : ""}" for="checkbox-${item.id}">${item.task}</label>`
+                  ? `<input class="p-1 rounded-lg ring-1 ring-gray-400 outline-none text-white max-w-[45vw] text-lg" type="text" id="edit-${item.id}" value="${item.task}">`
+                  : `<label class="text-xl lg:text-2xl font-semibold text-gray-300 text-wrap truncate ${item.isCompleted? "line-through" : ""}" for="checkbox-${item.id}">${item.task}</label>`
               }
             </div>
-            <div class="flex justify-center items-center gap-x-4">
+            <div class="flex justify-center items-center gap-x-4 ml-8 lg:ml-0">
               ${
                 isEditingMode && editingId === item.id
                   ? `<button value="${item.id}" class="save cursor-pointer flex justify-center items-center invert-75">
-                      <img class="h-7" src="${file}" alt="">
+                      <img class="min-w-[8vw] md:min-w-[5vw] lg:min-w-auto" src="${file}" alt="">
                     </button>`
                   : `<button value="${item.id}" class="update cursor-pointer flex justify-center items-center invert-75">
-                      <img class="h-7" src="${write}" alt="">
+                      <img class="min-w-[8vw] md:min-w-[5vw] lg:min-w-auto" src="${write}" alt="">
                     </button>`
               }
               <button value="${item.id}" class="delete cursor-pointer flex justify-center items-center invert-75">
-                <img class="h-7" src="${trash}" alt="">
+                <img class="min-w-[8vw] md:min-w-[5vw] lg:min-w-auto" src="${trash}" alt="">
               </button>
             </div>
           </div>`
@@ -65,18 +65,22 @@ function renderTasks() {
   } else {
     taskListElement.innerHTML = "<p class='text-gray-400 text-center'>No tasks available</p>";
   }
+  updateGoal();
 }
 
 
+
+// Initial render
+renderTasks();
+
 //updating goal
 function updateGoal(){
+  totalTargets = taskList.length;
+  completedTasks = taskList.filter(todo => todo.isCompleted).length;
   const goalElement = document.getElementById("goal") as HTMLHeadElement;
   goalElement.innerHTML = `<span>${completedTasks}</span>/<span>${totalTargets}</span>`
 }
 
-// Initial render
-renderTasks();
-updateGoal();
 
 // Add new task
 addToDoBtn.addEventListener("click", (event) => {
@@ -121,6 +125,7 @@ function deleteTodo(id: number) {
   taskList = taskList.filter((todo) => todo.id !== id);
   saveTasks();
   renderTasks();
+  
 }
 
 // Enable edit mode
@@ -150,9 +155,15 @@ function saveUpdatedTask(id: number) {
 // Toggle completion status
 function toggleCompletion(id: number) {
   const toDoToUpdate = taskList.find(todo => todo.id === id);
+
   if (toDoToUpdate) {
     toDoToUpdate.isCompleted = !toDoToUpdate.isCompleted;
   }
+
+  completedTasks = taskList.filter(todo => todo.isCompleted).length;
+
   saveTasks();
   renderTasks();
 }
+
+

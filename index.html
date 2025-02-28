@@ -9,7 +9,7 @@
   <body class="bg-primary">
     <div id="app">
       <main
-        class="min-h-screen mx-auto lg:max-w-[50vw] lg:pt-20 p-10 flex flex-col gap-4 items-center justify-start font-mono"
+        class="min-h-screen mx-auto md:max-w-[60vw] lg:max-w-[50vw] lg:pt-20 p-5 flex flex-col gap-4 items-center justify-start font-mono"
       >
         <div
           class="border-2 border-border rounded-xl p-5 lg:py-10 lg:px-14 w-fit flex justify-center items-center gap-x-8"
@@ -32,6 +32,7 @@
             placeholder="Write your next task"
             type="text"
             id="task"
+            autofocus
           />
           <button
             class="bg-secondary rounded-full p-3 cursor-pointer flex justify-center items-center"
@@ -44,7 +45,8 @@
             />
           </button>
         </div>
-        <div id="taskList" class="flex flex-col gap-y-4 mt-2 px-8 max-w-fit"></div>
+        <div id="taskList" class="flex flex-col gap-y-4 mt-2"></div>
+        <p class="text-lg text-secondary absolute bottom-0">Made with <span>❣️</span> by <a class="underline" href="https://github.com/milan-sh">Milan</a></p>
       </main>
     </div>
     <script type="module" src="/src/main.ts"></script>
